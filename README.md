@@ -8,6 +8,12 @@ The trick is using `FOR UPDATE SKIP LOCKED` in the select statement.
 
 ```clj
 (comment
+;; 0.0 Start the application
+  (user/start)
+
+  ;; 0 Perform migrations
+  (postigrao.migrations/apply-migrations)
+
   ;; 1. load the database with dummy data (I called this fn 3 times to generate enough data)
   (load-data dataset)
 

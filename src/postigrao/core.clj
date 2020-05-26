@@ -1,7 +1,7 @@
 (ns postigrao.core
   (:require [postigrao.services.database :refer [datasource]]
-            [clojure.core.async :as a]
             [chime.core :as chime]
+            [clojure.core.async :as a]
             [clojure.string :as cstr]
             [next.jdbc :as jdbc]
             [next.jdbc.sql :as sql])
@@ -80,6 +80,12 @@ returning user_id, amount")
        :error? (not (= (:ct ret1) (:ct ret2)))})))
 
 (comment
+  ;; 0.0 Start the application
+  (user/start)
+
+  ;; 0 Perform migrations
+  (postigrao.migrations/apply-migrations)
+
   ;; 1. load the database with dummy data (I called this fn 3 times to generate enough data)
   (load-data dataset)
 
